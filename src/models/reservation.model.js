@@ -1,5 +1,6 @@
 class Reservation {
-    constructor(date, start_time, end_time, purpose, number, available, status){
+    constructor(reservation_id, date, start_time, end_time, purpose, number, available, status){
+        this.reservation_id = reservation_id,   
         this.date = date,
         this.start_time = start_time,
         this.end_time = end_time,
