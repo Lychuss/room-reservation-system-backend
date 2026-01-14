@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
@@ -9,7 +10,7 @@
     "pkg": "^5.8.1",
     "prettier": "^3.7.4"
   },
-    "scripts": {
+  "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"

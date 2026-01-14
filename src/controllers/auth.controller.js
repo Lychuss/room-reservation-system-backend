@@ -19,8 +19,9 @@ export const signup = async (req, res) => {
         if(!signUp) return res.status(401).json({ message: 'Cannot create an account!', success: false});
 
         return res.status(200).json({ message: 'You have sign up successfully!', success: true});
-        
+
     } catch (err) {
+        console.log(err);
         return res.status(405).json({ message: 'There was a server error in signing you up!', success: false});
     }
 }

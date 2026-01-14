@@ -1,7 +1,7 @@
-import pool from '../config/db.js';
+import { pool } from '../config/db.js';
 
 export const insert = (account) => {
-    const query = `INSERT INTO users VALUE ($1, $2, $3, $4, $5, $6)`;
+    const query = `INSERT INTO users VALUES ($1, $2, $3, $4, $5, $6)`;
     
     const data =
         [
