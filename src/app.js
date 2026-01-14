@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/auth/room-reservation-system/signup', authRouter);
+app.use('/auth/room-reservation-system', authRouter);
 
 app.get("/health", (req, res) => {
   res.json({ status: "Server is running" });

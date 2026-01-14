@@ -32,15 +32,19 @@ export const registration = async (req, res, next) => {
     if(!username && !password) 
         return res.status(401).json({ message: 'Invalid input must have valid username and password', success: false });
 
-    const storePassword = await checkAccount(username);
+    const data = await checkAccount(username);
+
+    const rows = data.rows[0];
+
+    const storePassword = rows.password;
 
     if(storePassword === null) return res.status(404).json({ message: 'You have no account!', success: false});
 
-    const auth =  await encryption;
+    const auth = await encryption(password, storePassword);
 
     if(!auth) return res.status(404).json({ message: 'Incorrect Password!', success: false });
 
-    return res.status(200).json({ message: 'Login Successfully!', success: true });
+    next();
 }
 
 export const duplicateAccount = async (req, res, next) => {

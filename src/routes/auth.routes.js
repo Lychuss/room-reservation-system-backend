@@ -1,9 +1,10 @@
 import express from 'express';
-import { duplicateAccount } from '../middlewares/auth.middleware.js';
-import { signup } from '../controllers/auth.controller.js';
+import { duplicateAccount, registration } from '../middlewares/auth.middleware.js';
+import { signup, login } from '../controllers/auth.controller.js';
 
 const authRouter = express.Router();
 
-authRouter.post('/', duplicateAccount, signup);
+authRouter.post('/signup', duplicateAccount, signup);
+authRouter.post('/login', registration, login);
 
 export default authRouter;
