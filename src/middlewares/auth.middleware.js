@@ -42,3 +42,14 @@ export const registration = async (req, res, next) => {
 
     return res.status(200).json({ message: 'Login Successfully!', success: true });
 }
+
+export const duplicateAccount = async (req, res, next) => {
+    const { username } = req.body;
+
+    const haveAccount = await checkAccount(username);
+
+    if(!haveAccount) 
+        return res.status(403).json({ message: 'You have already have an account!', success: false });
+
+    next();
+}
