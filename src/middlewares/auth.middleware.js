@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { generateToken } from '../utils/jwt.js';
+import { checkAccount } from '../services/auth.service.js';
+import { encryption } from '../utils/password.js';
 
 export const authenticated = (req, res, next) => {
     const bearerHeader = req.headers['authorization'];
@@ -24,6 +26,19 @@ export const authenticated = (req, res, next) => {
     })
 }
 
-export const registration = () => {
+export const registration = async (req, res, next) => {
+    const { username, password} = req.body;
 
+    if(!username && !password) 
+        return res.status(401).json({ message: 'Invalid input must have valid username and password', success: false });
+
+    const storePassword = await checkAccount(username);
+
+    if(storePassword === null) return res.status(404).json({ message: 'You have no account!', success: false});
+
+    const auth =  await encryption;
+
+    if(!auth) return res.status(404).json({ message: 'Incorrect Password!', success: false });
+
+    return res.status(200).json({ message: 'Login Successfully!', success: true });
 }
