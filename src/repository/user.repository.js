@@ -1,10 +1,19 @@
 import pool from '../config/db.js';
 
-export const insert = (dob, firstName, lastName, username, password, role) => {
-    return pool.query(
-        `INSERT INTO users VALUE ($1, $2, $3, $4, $5, $6)`, 
-        [dob, firstName, lastName, username, password, role]
-    );
+export const insert = (account) => {
+    const query = `INSERT INTO users VALUE ($1, $2, $3, $4, $5, $6)`;
+    
+    const data =
+        [
+            account.dob,
+            account.firstName,
+            account.lastName,
+            account.username,
+            account.password,
+            account.role
+        ]
+
+    return pool.query(query, data);
 }
 
 export const select = (username) => {

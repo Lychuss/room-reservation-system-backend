@@ -7,3 +7,11 @@ export const checkAccount = async (username) => {
 
     return checkPassword;  
 }
+
+export const createAccount = async (data) => {
+    const insertData = await insert(data);
+
+    if(!insertData) return false;
+
+    return true;
+}
