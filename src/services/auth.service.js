@@ -1,4 +1,4 @@
-import { insert, select } from '../repository/user.repository.js';
+import { insert, select, getIdNameRole } from '../repository/user.repository.js';
 
 export const checkAccount = async (username) => {
     const checkPassword = await select(username);
@@ -14,4 +14,12 @@ export const createAccount = async (data) => {
     if(!insertData) return false;
 
     return true;
+}
+
+export const idNameRole = async (username) => {
+    const selectData = await getIdNameRole(username);
+
+    if(!selectData) return null;
+
+    return selectData;
 }

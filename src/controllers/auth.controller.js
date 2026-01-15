@@ -1,5 +1,6 @@
-import { createAccount } from "../services/auth.service.js";
+import { createAccount, idNameRole } from "../services/auth.service.js";
 import { hashPass } from "../utils/password.js";
+import { generateToken } from "../utils/jwt.js";
 import User from '../models/user.model.js'
 
 export const signup = async (req, res) => {
@@ -31,5 +32,18 @@ export const signup = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    return res.status(200).json({ message: 'You have login successfully', success: true });
+        const { username } = req.body;
+    try {
+        const data = await idNameRole(username);
+
+        const rows = data.rows;
+        
+        const token = generateToken(rows.user_id, rows.first_name, rows.role);
+
+        return res.status(200).json({ message: 'You have login successfully', success: true, token: token });
+    } catch(err) {
+        console.log(err);
+        return res.status(401).json({ message: 'There was an error in the server!', success: false });
+    }
+
 }

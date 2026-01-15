@@ -22,3 +22,10 @@ export const select = (username) => {
         [username]
     );
 }
+
+export const getIdNameRole = (username) => {
+    return pool.query(
+        'SELECT users.user_id, users.first_name, users.role FROM users WHERE username = $1',
+        [username]
+    );
+}
